@@ -40,7 +40,7 @@ const Hero = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.5, type: "spring" }}
-          className="mb-8"
+          className="mb-8 mt-16 sm:mt-20 md:mt-24 lg:mt-32"
         >
           <div className="text-9xl md:text-[12rem] animate-float">🐝</div>
         </motion.div>
