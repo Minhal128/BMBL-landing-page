@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-charcoal text-text-primary font-body;
+    margin: 0;
+    padding: 0;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-honey via-honey-dark to-soft-green bg-clip-text text-transparent;
+  }
+  
+  .honeycomb-pattern {
+    background-image: 
+      linear-gradient(30deg, #FFD54F33 12%, transparent 12.5%, transparent 87%, #FFD54F33 87.5%, #FFD54F33),
+      linear-gradient(150deg, #FFD54F33 12%, transparent 12.5%, transparent 87%, #FFD54F33 87.5%, #FFD54F33),
+      linear-gradient(30deg, #FFD54F33 12%, transparent 12.5%, transparent 87%, #FFD54F33 87.5%, #FFD54F33),
+      linear-gradient(150deg, #FFD54F33 12%, transparent 12.5%, transparent 87%, #FFD54F33 87.5%, #FFD54F33),
+      linear-gradient(60deg, #FFD54F22 25%, transparent 25.5%, transparent 75%, #FFD54F22 75%, #FFD54F22),
+      linear-gradient(60deg, #FFD54F22 25%, transparent 25.5%, transparent 75%, #FFD54F22 75%, #FFD54F22);
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+  }
+}
