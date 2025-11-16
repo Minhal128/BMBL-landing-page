@@ -1,0 +1,22 @@
+{
+  "network": "sepolia",
+  "contractAddress": "0x1778b1F4C7DeDDCD9ddAacB036225DB9Bfc433E6",
+  "contractName": "BMBLANCE",
+  "deployer": "0x2aB64e54AE5e0E98291A0de55869af3d7c692816",
+  "donationWallet": "0x2aB64e54AE5e0E98291A0de55869af3d7c692816",
+  "liquidityWallet": "0x2aB64e54AE5e0E98291A0de55869af3d7c692816",
+  "tokenDetails": {
+    "name": "BMBLANCE",
+    "symbol": "BMBL",
+    "decimals": 18,
+    "totalSupply": "1000000000000000000000000000000"
+  },
+  "taxes": {
+    "reflection": 200,
+    "donation": 200,
+    "liquidity": 200
+  },
+  "deploymentDate": "2025-11-13T20:08:51.517Z",
+  "explorerUrl": "https://sepolia.etherscan.io/address/0x1778b1F4C7DeDDCD9ddAacB036225DB9Bfc433E6",
+  "verificationCommand": "npx hardhat verify --network sepolia 0x1778b1F4C7DeDDCD9ddAacB036225DB9Bfc433E6 \"0x2aB64e54AE5e0E98291A0de55869af3d7c692816\" \"0x2aB64e54AE5e0E98291A0de55869af3d7c692816\""
+}

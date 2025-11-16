@@ -3,6 +3,13 @@ import { Button } from './ui/button';
 import { FileText, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
+  const scrollToSection = (sectionId) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
@@ -78,13 +85,22 @@ const Hero = () => {
           transition={{ delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button size="lg" className="text-lg px-10 py-6 gap-2">
+          <Button 
+            size="lg" 
+            className="text-lg px-10 py-6 gap-2 cursor-pointer"
+            onClick={() => scrollToSection('#presale')}
+          >
             Join the Hive (Presale)
             <ArrowRight className="w-5 h-5" />
           </Button>
-          <Button size="lg" variant="outline" className="text-lg px-10 py-6 gap-2">
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="text-lg px-10 py-6 gap-2 cursor-pointer"
+            onClick={() => scrollToSection('#about')}
+          >
             <FileText className="w-5 h-5" />
-            Read Whitepaper
+            Learn More
           </Button>
         </motion.div>
 

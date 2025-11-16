@@ -9,34 +9,46 @@ const Community = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const handleSocialClick = (platform) => {
+    const links = {
+      Telegram: "https://t.me/bmblance",
+      Twitter: "https://twitter.com/bmblance",
+      Discord: "https://discord.gg/bmblance",
+      Reddit: "https://reddit.com/r/bmblance"
+    };
+    if (links[platform]) {
+      window.open(links[platform], '_blank');
+    }
+  };
+
   const socialLinks = [
     {
       name: "Telegram",
       icon: <Send className="w-8 h-8" />,
       followers: "25K+",
       color: "from-blue-400 to-blue-600",
-      link: "#"
+      link: "https://t.me/bmblance"
     },
     {
       name: "Twitter",
       icon: <Twitter className="w-8 h-8" />,
       followers: "18K+",
       color: "from-sky-400 to-blue-500",
-      link: "#"
+      link: "https://twitter.com/bmblance"
     },
     {
       name: "Discord",
       icon: <MessageCircle className="w-8 h-8" />,
       followers: "12K+",
       color: "from-indigo-400 to-purple-600",
-      link: "#"
+      link: "https://discord.gg/bmblance"
     },
     {
       name: "Reddit",
       icon: <UsersIcon className="w-8 h-8" />,
       followers: "8K+",
       color: "from-orange-400 to-red-600",
-      link: "#"
+      link: "https://reddit.com/r/bmblance"
     }
   ];
 
@@ -94,13 +106,13 @@ const Community = () => {
         {/* Social Links Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {socialLinks.map((social, index) => (
-            <motion.a
+            <motion.div
               key={social.name}
-              href={social.link}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl"
+              className="group relative overflow-hidden rounded-2xl cursor-pointer"
+              onClick={() => handleSocialClick(social.name)}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${social.color} opacity-80 group-hover:opacity-100 transition-opacity`}></div>
               <div className="relative p-8 text-center">
@@ -111,12 +123,13 @@ const Community = () => {
                 <div className="text-white/90 text-lg font-medium">{social.followers} Followers</div>
                 <Button 
                   variant="ghost" 
-                  className="mt-4 text-white border-white hover:bg-white hover:text-charcoal"
+                  className="mt-4 text-white border-white hover:bg-white hover:text-charcoal cursor-pointer"
+                  onClick={() => handleSocialClick(social.name)}
                 >
                   Join Now
                 </Button>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
         </div>
 
@@ -139,10 +152,19 @@ const Community = () => {
               one transaction at a time.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8 py-6">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6 cursor-pointer"
+                onClick={() => handleSocialClick('Telegram')}
+              >
                 Join Telegram
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-lg px-8 py-6 cursor-pointer"
+                onClick={() => handleSocialClick('Twitter')}
+              >
                 Follow on Twitter
               </Button>
             </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Wallet } from 'lucide-react';
-import { Button } from './ui/button';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ConnectWallet } from '@thirdweb-dev/react';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,10 +66,17 @@ const Header = () => {
                 {item.name}
               </motion.a>
             ))}
-            <Button size="lg" className="gap-2">
-              <Wallet className="w-4 h-4" />
-              Connect Wallet
-            </Button>
+            <ConnectWallet
+              theme="dark"
+              btnTitle="Connect Wallet"
+              style={{
+                backgroundColor: '#FFD700',
+                color: '#000',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: '600',
+              }}
+            />
           </div>
 
           {/* Mobile Menu Button */}
@@ -100,10 +107,20 @@ const Header = () => {
                     {item.name}
                   </a>
                 ))}
-                <Button className="w-full gap-2" size="lg">
-                  <Wallet className="w-4 h-4" />
-                  Connect Wallet
-                </Button>
+                <div className="w-full">
+                  <ConnectWallet
+                    theme="dark"
+                    btnTitle="Connect Wallet"
+                    style={{
+                      backgroundColor: '#FFD700',
+                      color: '#000',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      width: '100%',
+                    }}
+                  />
+                </div>
               </div>
             </motion.div>
           )}
