@@ -9,11 +9,21 @@ export default defineConfig({
       buffer: 'buffer',
     },
   },
+  define: {
+    global: 'globalThis',
+    'process.env': {},
+  },
   optimizeDeps: {
+    include: ['buffer'],
     esbuildOptions: {
       define: {
         global: 'globalThis',
       },
+    },
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
     },
   },
 })
