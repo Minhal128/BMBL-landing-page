@@ -88,17 +88,43 @@ const Header = () => {
               modalTitle="Connect Your Wallet"
               modalTitleIconUrl=""
               switchToActiveChain={true}
-              welcomeScreen={{
-                title: "BMBLANCE Token",
-                subtitle: isMobile 
-                  ? "Select WalletConnect to connect with MetaMask mobile" 
-                  : "Connect your wallet to participate in the presale",
-                img: {
-                  src: "https://raw.githubusercontent.com/Minhal128/BMBL-landing-page/main/public/logo.png",
-                  width: 150,
-                  height: 150,
-                },
-              }}
+              welcomeScreen={() => (
+                <div style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  padding: '20px',
+                  textAlign: 'center'
+                }}>
+                  <div style={{ 
+                    fontSize: '80px', 
+                    animation: 'bounce 1s ease-in-out infinite',
+                    marginBottom: '20px'
+                  }}>
+                    🐝
+                  </div>
+                  <style>{`
+                    @keyframes bounce {
+                      0%, 100% { transform: translateY(0); }
+                      50% { transform: translateY(-15px); }
+                    }
+                  `}</style>
+                  <h2 style={{ 
+                    fontSize: '24px', 
+                    fontWeight: 'bold', 
+                    marginBottom: '10px',
+                    color: '#fff'
+                  }}>
+                    BMBLANCE Token
+                  </h2>
+                  <p style={{ color: '#aaa', fontSize: '14px' }}>
+                    {isMobile 
+                      ? "Select WalletConnect to connect with MetaMask mobile" 
+                      : "Connect your wallet to participate in the presale"}
+                  </p>
+                </div>
+              )}
               modalSize="wide"
               style={{
                 backgroundColor: '#FFD700',
@@ -144,10 +170,41 @@ const Header = () => {
                     btnTitle={getButtonTitle()}
                     modalTitle="Connect Your Wallet"
                     switchToActiveChain={true}
-                    welcomeScreen={{
-                      title: "BMBLANCE Token",
-                      subtitle: "Select WalletConnect to connect with MetaMask",
-                    }}
+                    welcomeScreen={() => (
+                      <div style={{ 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        padding: '20px',
+                        textAlign: 'center'
+                      }}>
+                        <div style={{ 
+                          fontSize: '60px', 
+                          animation: 'bounce 1s ease-in-out infinite',
+                          marginBottom: '15px'
+                        }}>
+                          🐝
+                        </div>
+                        <style>{`
+                          @keyframes bounce {
+                            0%, 100% { transform: translateY(0); }
+                            50% { transform: translateY(-15px); }
+                          }
+                        `}</style>
+                        <h2 style={{ 
+                          fontSize: '20px', 
+                          fontWeight: 'bold', 
+                          marginBottom: '8px',
+                          color: '#fff'
+                        }}>
+                          BMBLANCE Token
+                        </h2>
+                        <p style={{ color: '#aaa', fontSize: '13px' }}>
+                          Select WalletConnect to connect with MetaMask
+                        </p>
+                      </div>
+                    )}
                     modalSize="compact"
                     style={{
                       backgroundColor: '#FFD700',
