@@ -260,27 +260,6 @@ const Presale = () => {
                   </div>
                 </div>
 
-                {/* Input */}
-                <div className="mb-6">
-                  <label className="block text-text-primary mb-2 font-medium">
-                    Amount (ETH - Testnet)
-                  </label>
-                  <input
-                    type="number"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    placeholder="0.01"
-                    step="0.01"
-                    min="0"
-                    className="w-full bg-charcoal/60 border border-honey/30 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-honey transition-colors"
-                  />
-                  {amount && (
-                    <p className="text-soft-green text-sm mt-2">
-                      Estimated tokens: ~{(parseFloat(amount) / 0.0000001).toFixed(2)} BMBL
-                    </p>
-                  )}
-                </div>
-
                 {/* Buttons */}
                 <div className="space-y-3">
                   {!address ? (
@@ -294,15 +273,6 @@ const Presale = () => {
                     </Button>
                   ) : (
                     <>
-                      <Button 
-                        className="w-full gap-2" 
-                        size="lg"
-                        onClick={handlePresalePurchaseClick}
-                        disabled={isTransferring || !amount || parseFloat(amount) <= 0}
-                      >
-                        {isTransferring ? 'Processing...' : 'Transfer Tokens'}
-                        <ArrowRight className="w-5 h-5" />
-                      </Button>
                       <Button 
                         className="w-full gap-2 bg-soft-green hover:bg-soft-green/80 text-charcoal font-bold" 
                         size="lg"
@@ -441,17 +411,18 @@ const Presale = () => {
         {/* Real Transfer Section */}
         {address && (
           <motion.div
+            id="transfer-section"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-16 max-w-2xl mx-auto"
           >
-            <Card className="bg-gradient-to-br from-soft-green/10 to-honey/10 border-soft-green/30">
+            <Card className="bg-gradient-to-br from-soft-green/10 to-honey/10 border-2 border-soft-green/30">
               <CardContent className="p-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-soft-green mb-2">🔥 Real Token Transfer</h3>
-                  <p className="text-text-secondary">Make actual blockchain transactions visible on Etherscan!</p>
-                  <p className="text-sm text-honey mt-2">Your Balance: {balance} BMBL</p>
+                  <h3 className="text-2xl font-bold text-honey mb-2">🐝 Transfer BMBL Tokens</h3>
+                  <p className="text-text-secondary">Send tokens to any wallet address on Sepolia Testnet</p>
+                  <p className="text-sm text-soft-green mt-2 font-bold">Your Balance: {balance} BMBL</p>
                 </div>
 
                 <div className="space-y-4">
@@ -488,7 +459,7 @@ const Presale = () => {
 
                   {/* Transfer Button */}
                   <Button 
-                    className="w-full gap-2 bg-soft-green hover:bg-soft-green/80 text-charcoal font-bold" 
+                    className="w-full gap-2 bg-honey hover:bg-honey/80 text-charcoal font-bold" 
                     size="lg"
                     onClick={handleRealTransfer}
                     disabled={isTransferring || !transferTo || !transferAmount}
@@ -500,8 +471,8 @@ const Presale = () => {
                       </>
                     ) : (
                       <>
-                        <ExternalLink className="w-5 h-5" />
-                        Send Real Transaction
+                        <ArrowRight className="w-5 h-5" />
+                        Send BMBL Tokens
                       </>
                     )}
                   </Button>

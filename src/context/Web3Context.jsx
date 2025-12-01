@@ -143,8 +143,28 @@ export const Web3ContextProvider = ({ children }) => {
 
   const addTokenToWallet = async () => {
     try {
+      // Check if we're on mobile
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
       if (!window.ethereum) {
-        throw new Error('No wallet connected');
+        // On mobile without direct ethereum access, show manual instructions
+        if (isMobile) {
+          toast.info(
+            <div>
+              <p><strong>Add Token Manually:</strong></p>
+              <p style={{fontSize: '12px', marginTop: '8px'}}>
+                1. Open MetaMask<br/>
+                2. Go to "Import Tokens"<br/>
+                3. Paste: {CONTRACT_ADDRESS.slice(0, 10)}...
+              </p>
+            </div>,
+            { autoClose: 10000 }
+          );
+          // Copy address to clipboard
+          navigator.clipboard.writeText(CONTRACT_ADDRESS);
+          return true;
+        }
+        throw new Error('Please open this site in MetaMask browser or install MetaMask extension');
       }
 
       const wasAdded = await window.ethereum.request({
@@ -153,8 +173,8 @@ export const Web3ContextProvider = ({ children }) => {
           type: 'ERC20',
           options: {
             address: CONTRACT_ADDRESS,
-            symbol: tokenSymbol,
-            decimals: tokenDecimals,
+            symbol: tokenSymbol || 'BMBL',
+            decimals: tokenDecimals || 18,
             image: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x0000000000000000000000000000000000000000/logo.png',
           },
         },
@@ -166,6 +186,24 @@ export const Web3ContextProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error adding token:', error);
+      
+      // On mobile, if the method fails, show manual instructions
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (isMobile || error.code === -32601 || error.message?.includes('not supported')) {
+        toast.info(
+          <div>
+            <p><strong>Add Token Manually:</strong></p>
+            <p style={{fontSize: '12px', marginTop: '8px'}}>
+              Contract: {CONTRACT_ADDRESS.slice(0, 15)}...<br/>
+              Symbol: BMBL | Decimals: 18
+            </p>
+          </div>,
+          { autoClose: 10000 }
+        );
+        navigator.clipboard.writeText(CONTRACT_ADDRESS);
+        return true;
+      }
+      
       if (error.code === 4001) {
         toast.error('You declined to add the token');
       } else {
