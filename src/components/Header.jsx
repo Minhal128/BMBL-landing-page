@@ -3,6 +3,9 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ConnectWallet, useConnectionStatus } from '@thirdweb-dev/react';
 
+// Detect if user is on mobile
+const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -37,6 +40,13 @@ const Header = () => {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsOpen(false);
     }
+  };
+
+  // Get button title based on connection status
+  const getButtonTitle = () => {
+    if (connectionStatus === "connecting") return "Connecting...";
+    if (connectionStatus === "connected") return "Connected";
+    return "Connect Wallet";
   };
 
   return (
@@ -74,14 +84,15 @@ const Header = () => {
             ))}
             <ConnectWallet
               theme="dark"
-              btnTitle={connectionStatus === "connecting" ? "Connecting..." : "Connect Wallet"}
+              btnTitle={getButtonTitle()}
               modalTitle="Connect Your Wallet"
               modalTitleIconUrl=""
-              detailsBtn={() => <span>Connected</span>}
               switchToActiveChain={true}
               welcomeScreen={{
                 title: "BMBLANCE Token",
-                subtitle: "Connect your wallet to participate in the presale",
+                subtitle: isMobile 
+                  ? "Select WalletConnect to connect with MetaMask mobile" 
+                  : "Connect your wallet to participate in the presale",
                 img: {
                   src: "https://raw.githubusercontent.com/Minhal128/BMBL-landing-page/main/public/logo.png",
                   width: 150,
@@ -130,12 +141,12 @@ const Header = () => {
                 <div className="w-full">
                   <ConnectWallet
                     theme="dark"
-                    btnTitle={connectionStatus === "connecting" ? "Connecting..." : "Connect Wallet"}
+                    btnTitle={getButtonTitle()}
                     modalTitle="Connect Your Wallet"
                     switchToActiveChain={true}
                     welcomeScreen={{
                       title: "BMBLANCE Token",
-                      subtitle: "Connect your wallet to participate in the presale",
+                      subtitle: "Select WalletConnect to connect with MetaMask",
                     }}
                     modalSize="compact"
                     style={{
